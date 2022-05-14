@@ -32,9 +32,37 @@ function App() {
   const { loading, error, data } = useQuery(GET_CATEGORIES);
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
+
   return (
     <div className="App">
-      <img src={data.categories[1].products[1].gallery[1]} alt="img" />
+      <nav className="main-nav">
+        <ul>
+          {data.categories.map((item, index) => {
+            return (
+              <li key={index}>
+                <a href="#">{item.name}</a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      <div className="main-all-pict">
+        {data.categories.map((item, i) => {
+          return (
+            <div className="describtion" key={i}>
+              {item.products[0].description}
+              <img
+                src={item.products[0].gallery}
+                alt="img"
+                width={300}
+                height={300}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/*<img src={data.categories[1].products[1].gallery[1]} alt="img" />*/}
     </div>
   );
 }
