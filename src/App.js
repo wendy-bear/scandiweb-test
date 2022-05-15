@@ -33,6 +33,20 @@ function App() {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
+  const card = data.categories.map((item, i) => {
+    return (
+      <div className="describtion" key={i}>
+        {item.products[i].description}
+        <img
+          src={item.products[i].gallery}
+          alt="img"
+          width={300}
+          height={300}
+        />
+      </div>
+    );
+  });
+
   return (
     <div className="App">
       <nav className="main-nav">
@@ -46,23 +60,8 @@ function App() {
           })}
         </ul>
       </nav>
-      <div className="main-all-pict">
-        {data.categories.map((item, i) => {
-          return (
-            <div className="describtion" key={i}>
-              {item.products[0].description}
-              <img
-                src={item.products[0].gallery}
-                alt="img"
-                width={300}
-                height={300}
-              />
-            </div>
-          );
-        })}
-      </div>
 
-      {/*<img src={data.categories[1].products[1].gallery[1]} alt="img" />*/}
+      <div className="main-all-pict">{card}</div>
     </div>
   );
 }
